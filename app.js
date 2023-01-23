@@ -1,9 +1,9 @@
-const taxRate = 0.18;
-const shippingPrice = 15;
+const taxtRate = 0.18;
+const shippingPrice = 20;
 const shippingFreePrice = 300;
 
 window.addEventListener("load",()=>{
-    localStorage.setItem("taxRate",taxRate);
+    localStorage.setItem("taxtRate", taxtRate);
     localStorage.setItem("shippingPrice",shippingPrice);
     localStorage.setItem("shippingFreePrice",shippingFreePrice);
 
@@ -28,9 +28,9 @@ event.target.parentElement.querySelector(".quantity").innerText--
         }
     }
     else if(event.target.className == "fa-solid fa-plus"){
-        event.target.previousElementSibling.innerText++;
+        // event.target.previousElementSibling.innerText++;
         // event.target.querySelector(".quantity").innerText++;
-       // event.target.parentElement.querySelector(".quantity").innerText++
+       event.target.parentElement.querySelector(".quantity").innerText++;
 
 
 
@@ -55,14 +55,15 @@ productTotalDiv.innerText = (price * quantity).toFixed(2);
 
 const calculateCartPrice = () =>{
     const productsTotalPricesDiv = document.querySelectorAll(".price");
-    const subtotal = [...productsTotalPricesDiv].reduce((acc,price)=>acc + Number(price.innerText),0)
+    const subtotal = [...productsTotalPricesDiv].reduce((acc,price)=>acc + Number(price.innerText),0);
     const taxtPrice = subtotal * localStorage.getItem("taxtRate")
    const shippingPrice =  parseFloat(subtotal > 0 && subtotal < localStorage.getItem("shippingFreePprice") ?
    localStorage.getItem("shippingPrice") :
    0)
     const totalCart = subtotal + taxtPrice + shippingPrice;
+
     document.querySelector("#subtotalCart").innerText = subtotal.toFixed(2);
-    document.querySelector("#taxRateCart").innerText = taxtPrice.toFixed(2);
+    document.querySelector("#taxtRateCart").innerText = taxtPrice.toFixed(2);
     document.querySelector("#shippingCart").innerText = shippingPrice.toFixed(2);
-    document.querySelector("#subtotalCart").innerText = totalCart.toFixed(2);
+    document.querySelector("#totalCart").innerText = totalCart.toFixed(2);
 }
